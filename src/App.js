@@ -9,10 +9,13 @@ import {
 	getAvgAssetBrought,
 	getLiquidationCount,
 } from "./Helper/DataPoints";
+import CreditScore from "./components/CreditScore/CreditScore";
+import Process from "./components/Process/Process";
 function App() {
 	const name = useRef();
 	const [transactions, setTransactions] = useState([]);
 	const [tokenTransactions, setTokenTransactions] = useState([]);
+	const [process, setProcess] = useState(false);
 
 	async function getAddress() {
 		if (name.current.value) {
@@ -27,9 +30,18 @@ function App() {
 		getAvgAssetBrought(trx, tokenTrx, name.current.value);
 		getLiquidationCount(trx);
 	}
+
+	console.log(transactions);
+
+	const handleProcess = () => {
+		setProcess(false);
+	};
 	return (
 		<div className="App">
-			<header className="App-header">
+			{process && <Process handleProcess={handleProcess} />}
+			<CreditScore setProcess={setProcess} />
+
+			{/* <header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
@@ -44,7 +56,7 @@ function App() {
 				</a>
 				<input type="text" name="walletAddress" ref={name}></input>
 				<button onClick={getAddress}>Click Me</button>
-			</header>
+			</header> */}
 		</div>
 	);
 }
