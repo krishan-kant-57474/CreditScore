@@ -8,7 +8,7 @@ const CreditScore = ({ setProcess }) => {
 			<h1>Credit Score</h1>
 			<div className="chain">
 				<p>Off-chain Credit Score</p>
-				{false ? (
+				{true ? (
 					<div className="box">
 						<div className="btn-box">
 							<button
